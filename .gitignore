@@ -1,0 +1,6 @@
+data/
+__pycache__/
+*.pyc
+bitflip_model_*.pt
+mnv2.pt
+*.npz

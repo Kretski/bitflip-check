@@ -1,0 +1,52 @@
+﻿
+====================================================================================================
+MODEL custom:mnv2_def@95ee37ad   FORMAT int8   bit selection: all
+====================================================================================================
+Seeds / clean accuracy of THIS format on the eval-subset: 0:75.30
+
+--- random flips, pooled over seeds (k = reference flips per image; tmr is exposed to 3x the flips) ---
+    flips/image actually used: k=100->25
+   k method              extra copies     n  mean acc  mean drop  P(drop>1)  P(drop>5)   95% CI P(drop>5)  P(collapse)
+ 100 none                           0   300     73.14       2.16      0.040      0.037 [ 0.021, 0.064]        0.030
+ 100 clamp                  0 (+clip)   300     73.19       2.11      0.040      0.033 [ 0.018, 0.060]        0.030
+ 100 scrub                          1   300     75.30       0.00      0.000      0.000 [ 0.000, 0.013]        0.000
+ 100 tmr                            2   300     75.30       0.00      0.000      0.000 [ 0.000, 0.013]        0.000
+ 100 scrub_scales         scales only   300     73.36       1.94      0.033      0.030 [ 0.016, 0.056]        0.030
+ 100 scrub_scales+clamp   scales only   300     73.36       1.94      0.033      0.030 [ 0.016, 0.056]        0.030
+
+--- paired by trial (every method sees the SAME flips): events 'drop > 5pt' that a method removes / adds; exact two-sided sign test ---
+  k=100  none -> clamp         removed   1, added   0 of 300 trials   exact p = 1.000   (not distinguishable from chance at this n)
+  k=100  none -> scrub_scales  removed   2, added   0 of 300 trials   exact p = 0.500   (not distinguishable from chance at this n)
+
+--- by seed (one trained model each): P(drop>5pt), methods none / clamp / scrub_scales ---
+  k=100  seed 0: 0.037/0.033/0.030
+         across 1 models: none mean 0.037 (min 0.037, max 0.037)   clamp mean 0.033 (min 0.033, max 0.033)   scrub_scales mean 0.030 (min 0.030, max 0.030)
+
+Notes: scrub/tmr results hold only under their stated assumptions (fault-free golden copy; no coincident flips).
+Trials are drawn from a few trained models, so CIs understate the real uncertainty.
+
+====================================================================================================
+MODEL custom:mnv2_def@95ee37ad   FORMAT int8pc   bit selection: all
+====================================================================================================
+Seeds / clean accuracy of THIS format on the eval-subset: 0:75.50
+
+--- random flips, pooled over seeds (k = reference flips per image; tmr is exposed to 3x the flips) ---
+    flips/image actually used: k=100->26
+   k method              extra copies     n  mean acc  mean drop  P(drop>1)  P(drop>5)   95% CI P(drop>5)  P(collapse)
+ 100 none                           0   300     73.12       2.38      0.060      0.043 [ 0.025, 0.073]        0.027
+ 100 clamp                  0 (+clip)   300     73.95       1.55      0.030      0.027 [ 0.014, 0.052]        0.023
+ 100 scrub                          1   300     75.50       0.00      0.000      0.000 [ 0.000, 0.013]        0.000
+ 100 tmr                            2   300     75.50       0.00      0.000      0.000 [ 0.000, 0.013]        0.000
+ 100 scrub_scales         scales only   300     73.98       1.52      0.023      0.023 [ 0.011, 0.047]        0.023
+ 100 scrub_scales+clamp   scales only   300     73.98       1.52      0.023      0.023 [ 0.011, 0.047]        0.023
+
+--- paired by trial (every method sees the SAME flips): events 'drop > 5pt' that a method removes / adds; exact two-sided sign test ---
+  k=100  none -> clamp         removed   5, added   0 of 300 trials   exact p = 0.062   (not distinguishable from chance at this n)
+  k=100  none -> scrub_scales  removed   6, added   0 of 300 trials   exact p = 0.031
+
+--- by seed (one trained model each): P(drop>5pt), methods none / clamp / scrub_scales ---
+  k=100  seed 0: 0.043/0.027/0.023
+         across 1 models: none mean 0.043 (min 0.043, max 0.043)   clamp mean 0.027 (min 0.027, max 0.027)   scrub_scales mean 0.023 (min 0.023, max 0.023)
+
+Notes: scrub/tmr results hold only under their stated assumptions (fault-free golden copy; no coincident flips).
+Trials are drawn from a few trained models, so CIs understate the real uncertainty.
