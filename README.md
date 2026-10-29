@@ -43,6 +43,14 @@ python bitflip_test.py --model-file mynet_full.pt --data-npz eval.npz --formats 
 - One model is one run: the intervals then describe flip-to-flip noise only, not variation between trainings.
 - `--mode overhead` works the same way and uses your data for the timing input.
 
+### Report
+
+```
+python make_report.py results/mnv2_audit.jsonl --overhead results/bitflip_overhead.jsonl --out mnv2_report.md
+```
+
+`make_report.py` (standard library only) turns a result file into one Markdown document: what was tested (SHA-256 of model, weights and data), the baseline (no protection), the numbers with intervals, the paired comparison on the same flips, the cost of the protections, the limits, and the command to repeat the run. It only restates what is in the file.
+
 Models: `--arch smallcnn` (default, 1.07 M parameters) or `--arch resnet8` (78 k parameters, with BatchNorm). Both are trained from scratch on CIFAR-10 (8 epochs, 3 seeds). Clean accuracy: SmallCNN about 70%, ResNet8 about 66-68%.
 
 ## Results
